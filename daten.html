@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Dynamische-Datenseite</title>
+</head>
+<body>
+  <h1>Dynamische-Datenseite</h1>
+  <ul id="liste-linz"></ul>
+  <ul id="service-linz"></ul>
+  <!-- Script 5.a: Linz Stadtteile und Namen -->
+  <script>
+    // Lokale Daten (ergänzt um eigenen Namen und Namen der Mutter)
+    const stadtteile = [
+      "Urfahr", 
+      "Innere Stadt", 
+      "Bindermichel", 
+      "A Cherno 5R", 
+      "Mutter von A Cherno 5R"
+    ];
+    const liste = document.getElementById("liste-linz");
+    stadtteile.forEach(s => {
+      let li = document.createElement("li");
+      li.textContent = s;
+      liste.appendChild(li);
+    });
+  </script>
+  <!-- Script 5.d: Daten von Server laden (Servicecall) -->
+  <script>
+    // Daten vom Server laden (Servicecall)
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(response => response.json()) // Antwort in JSON umwandeln
+      .then(data => {
+        const sListe = document.getElementById("service-linz"); // Angepasst an ID 'service-linz'
+        data.forEach(user => {
+          let li = document.createElement("li");
+          li.textContent = "User: " + user.name; // Wir greifen auf das Feld 'name' zu
+          sListe.appendChild(li);
+        });
+      });
+  </script>
+</body>
+</html>
